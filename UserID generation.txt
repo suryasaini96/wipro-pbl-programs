@@ -1,0 +1,49 @@
+String fn = input1;
+		String ln = input2;
+		String sPin = Integer.toString(input3);
+		int n = input4;
+		int pin[] = new int[sPin.length()];
+
+		String longName="";
+		String shortName="";
+
+		StringBuffer userID = new StringBuffer();
+
+		for(int i=0; i<sPin.length(); i++){
+			pin[i] = Character.getNumericValue(sPin.charAt(i));
+			System.out.println(pin[i]);
+		}
+
+		if(fn.length()>ln.length()){
+			longName = fn;
+			shortName = ln;
+		}
+		else if(fn.length()<ln.length()){
+			longName = ln;
+			shortName = fn;
+		}
+		else if(fn.length()==ln.length()){
+			if(fn.compareTo(ln)<0){
+				longName = ln;
+				shortName = fn;
+			}
+			else if (fn.compareTo(ln)>0){
+				longName = fn;
+				shortName = ln;
+			}	
+		}
+		userID.append(shortName.charAt(shortName.length()-1));
+		userID.append(longName);
+		userID.append(pin[n-1]);
+		userID.append(pin[pin.length-n]);
+		for(int i=0; i<userID.length(); i++){
+			char c = userID.charAt(i);
+			if(Character.isLowerCase(c)){
+				userID.setCharAt(i, Character.toUpperCase(c));
+			}
+			else{
+				userID.setCharAt(i, Character.toLowerCase(c));
+			}
+		}
+
+		return userID.toString();

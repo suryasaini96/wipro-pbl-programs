@@ -1,0 +1,89 @@
+int xGrid = input1;
+        int yGrid = input2;
+        String current[] = input3.split("-");
+		int x = Integer.parseInt(current[0]);
+		int y = Integer.parseInt(current[1]);
+		char D = current[2].charAt(0); //Direction robot is facing
+        String msg = input4; //contains series of M, L or R
+		String error="";
+		StringBuffer out = new StringBuffer();
+
+		for(int i=0; i<msg.length();i++){
+			if(msg.charAt(i) == 'M'){
+				if(D == 'N'){
+					y++;
+				}
+				else if(D == 'S'){
+					y--;
+				}
+				else if(D == 'E'){
+					x++;
+				}
+				else if(D == 'W'){
+					x--;
+				}
+
+				if(x>xGrid){
+					x--;
+					error = "ER";
+					break;
+				}
+				else if(x<0){
+					x++;
+					error = "ER";
+					break;
+				}
+				if(y>yGrid){
+					y--;
+					error = "ER";
+					break;
+				}
+				else if(y<0){
+					y++;
+					error = "ER";
+					break;
+				}
+			}
+
+			else if(msg.charAt(i) == 'L'){
+				switch (D){ //switch on current position
+					case 'N':
+						D = 'W';
+						break;
+					case 'S':
+						D = 'E';
+						break;
+					case 'E':
+						D = 'N';
+						break;
+					case 'W':
+						D = 'S';
+						break;
+				}
+				
+			}
+			else if(msg.charAt(i) == 'R'){
+				switch (D){ //switch on current position
+					case 'N':
+						D = 'E';
+						break;
+					case 'S':
+						D = 'W';
+						break;
+					case 'E':
+						D = 'S';
+						break;
+					case 'W':
+						D = 'N';
+						break;
+				}
+			}
+		}
+		System.out.println(x + " " + y + " " + D);
+		out.append(Integer.toString(x) + "-" + Integer.toString(y) + "-" + Character.toString(D));
+		if(error.length()>0){
+			out.append("-" + error);
+		}
+			
+
+		return out.toString();

@@ -1,0 +1,40 @@
+		long num = Long.parseLong(input1);
+		ArrayList<Integer> numArr = new ArrayList<Integer>();
+		StringBuffer out = new StringBuffer();
+		
+		while(num>0){
+			long r = num%10;
+			numArr.add((int)r);
+			num/=10;
+		}
+		Collections.reverse(numArr);
+		int sum=numArr.get(0);
+		int k;
+		for(int i=1;i<10;i++){
+			k=i; //k holds current iteration
+			if(sum%2==1){ // if sum is already odd
+				while(sum%2==1 && k<=9){ //add till sum is odd
+					sum+= numArr.get(k);
+					k++;
+				}
+				out.append(sum); //append sum after sum becomes even
+				if(k<10) //Only assign next digit if within array bounds
+					sum = numArr.get(k); //assign sum as next digit for next pass
+			}
+			else{ // if sum is even
+				while(sum%2==0 && k<=9){ //add till sum is even
+					sum+= numArr.get(k);
+					k++;
+				}
+				out.append(sum); //append sum after sum becomes even
+				if(k<10) //Only assign next digit if within array bounds
+					sum = numArr.get(k); //assign sum as next digit for next pass
+			}
+			if(sum==numArr.get(9)){ // if sum is last digit of array
+				out.append(sum); //append it to output
+				break;
+			}
+			i=k; //change i after while loops for the next loop if not at last num
+		}
+
+		return Integer.parseInt(out.toString());

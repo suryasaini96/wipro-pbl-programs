@@ -1,0 +1,47 @@
+//Write code here...
+		//input1 array
+		//input2 array length
+		int arr[] = new int[input2];
+		arr = input1;
+		int len = input2;
+		int seq = 0;
+		boolean seqBreak = false;
+		int numSeq = 0;
+		ArrayList<Integer>[] li = new ArrayList[len];
+		for(int i=0;i<len;i++){ //initialising arraylist
+			li[i] = new ArrayList<Integer>();
+		}
+        for(int i=1;i<len; i++){
+			if(arr[i-1]>arr[i]){
+				li[seq].add(arr[i-1]);
+				if( (i+1)!=len && arr[i]<arr[i+1]){
+					seqBreak = true;
+				}
+				if(i+1 == len){
+					seqBreak = true;
+				}
+				if(seqBreak){
+					li[seq].add(arr[i]); // adding current element on break also
+					seq++;
+				}
+				seqBreak = false;
+			}
+		}
+
+		//finding number of seq
+		for(int i=0;i<len;i++){
+			if(li[i].size()>0){
+				numSeq++;
+			}
+		}
+
+		//finding largest sequence
+		int max = li[0].size();
+		for(int i=1;i<len;i++){
+			if(li[i].size()>max){
+				max = li[i].size();
+			}
+		}
+
+		Result obj = new Result(numSeq,max);
+		return obj;

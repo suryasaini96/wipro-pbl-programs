@@ -1,2 +1,2 @@
 # PBL-Programs
-Practice programs from mettl
+Wipro practice programs from mettl (Logic Building Hour Plan).
